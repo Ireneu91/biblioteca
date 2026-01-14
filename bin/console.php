@@ -91,15 +91,13 @@ switch ($command) {
     case 'book:memberlist':
         $members = $membersRepo->findAll();
         //var_dump($members);
-        if($member){
+        if($members){
             foreach($members as $member){
-                echo $member->id()." | ". $member->fullName()."\n";
-            }
+            echo $member->id()." | ". $member->fullName()."\n";
+           }
         }else{
             echo "Nessun membro";
         }
-        
-        
         exit(0);
 
     default:
