@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /**
- * Bootstrap dell'applicazione:
+ * Bootstrap (inizio) dell'applicazione:
  * - carica le variabili da .env
  * - registra un autoloader semplice per le classi in /src
  * - espone una funzione env() per leggere configurazioni
