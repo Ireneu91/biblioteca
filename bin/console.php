@@ -87,6 +87,20 @@ switch ($command) {
 
         echo $service->returnBook($bookId, $todayYmd) . "\n";
         exit(0);
+    
+    case 'book:memberlist':
+        $members = $membersRepo->findAll();
+        //var_dump($members);
+        if($member){
+            foreach($members as $member){
+                echo $member->id()." | ". $member->fullName()."\n";
+            }
+        }else{
+            echo "Nessun membro";
+        }
+        
+        
+        exit(0);
 
     default:
         echo "Comando sconosciuto: $command\n";
