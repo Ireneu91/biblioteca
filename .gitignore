@@ -1,11 +1,5 @@
-<<<<<<< HEAD
 .env
 data/loans.csv
 data/books.csv
 data/members.csv
-=======
-data/loans.csv
-data/books.csv
-data/members.csv
-.env
->>>>>>> 1c7229d526bb606b20e62675b4f3cd77449b72ea
+
