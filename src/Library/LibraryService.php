@@ -51,7 +51,7 @@ final class LibraryService
 
         $member = $this->members->findById($memberId);
         if ($member === null) {
-            return "Errore: membro non trovato (id=$memberId).";
+            return "(id=$memberId)\n Suggerimento: usa members:list";
         }
 
         if (!$book->isAvailable()) {
