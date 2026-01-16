@@ -52,7 +52,9 @@ switch ($command) {
         echo "  php bin/console.php book:lend B1 M1\n";
         echo "  php bin/console.php book:return B1\n";
         echo "\nConfigurazione (.env):\n";
-        echo $dataDir." ".$dateFormat." ".$maxLoans."\n";
+        echo "  DATA_DIR: ".$dataDir."             Cartella che contiene i dati\n";
+        echo "  DATE_FORMAT: ".$dateFormat."              Formato data\n";
+        echo "  MAX_LOANS_PER_MEMBER: ".$maxLoans."                  Numero massimo di prestiti\n";
         exit(0);
 
     case 'books:list':
