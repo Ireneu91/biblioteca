@@ -88,7 +88,7 @@ switch ($command) {
         echo $service->returnBook($bookId, $todayYmd) . "\n";
         exit(0);
     
-    case 'book:memberlist':
+    case 'members:list':
         $members = $membersRepo->findAll();
         //var_dump($members);
         if($members){
