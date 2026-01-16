@@ -51,7 +51,7 @@ final class LibraryService
 
         $member = $this->members->findById($memberId);
         if ($member === null) {
-            return "(id=$memberId)\n Suggerimento: usa members:list";
+            return "Errore: membro non trovato (id=$memberId)\nSuggerimento: usa members:list";
         }
 
         if (!$book->isAvailable()) {
@@ -60,7 +60,7 @@ final class LibraryService
 
         $openLoans = $this->loans->countOpenLoansByMember($memberId);
         if ($openLoans >= $this->maxLoansPerMember) {
-            return "Errore: il membro $memberId ha già raggiunto il limite prestiti ({$this->maxLoansPerMember}).";
+            return "Errore: il membro $memberId ha già raggiunto il limite prestiti.\nIl massimo di prestiti è".$this->maxLoansPerMember."\nIl membro ".$member->fullName()." ha effettuato ".$openLoans.".";
         }
 
         // Crea prestito
