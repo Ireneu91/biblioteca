@@ -33,8 +33,9 @@ $loansRepo = new LoanRepository($storage);
 $service = new LibraryService($booksRepo, $membersRepo, $loansRepo, $maxLoans);
 
 // Parsing argomenti
-$args = $argv;
+$args = $argv; // $argv è una variabile php che contiene l'array degli argomenti
 array_shift($args); // rimuove nome script
+// var_dump($args);
 
 $command = $args[0] ?? 'help';
 $todayYmd = date('Y-m-d'); // nel CSV salviamo sempre in formato stabile
@@ -103,6 +104,30 @@ switch ($command) {
         }
 
         echo $service->returnBook($bookId, $todayYmd) . "\n";
+        exit(0);
+
+    case 'book:status':
+        $bookId = $args[1] ?? '';
+        $book = $booksRepo->findById($bookId);
+        // se non esiste
+        if($book === null){
+            echo "Il libro non esiste";
+        }
+        // se esiste
+        else {
+            // se disponibile 
+            if($book->isAvailable()){
+                echo $book->id()." ".$book->title()." ".$book->author()." disponibile ";
+            }
+            // se in prestito
+            else {
+                // loan_id e member_id
+                $loan = $loansRepo->findOpenLoanByBookId($bookId);
+                $loanId = $loan->loanId();
+                $memberId = $loan->memberId();
+                echo $book->id()." ".$book->title()." ".$book->author()." in prestito ".$loanId." ".$memberId;
+            }
+        } 
         exit(0);
 
     default:
