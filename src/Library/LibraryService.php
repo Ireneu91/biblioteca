@@ -29,11 +29,24 @@ final class LibraryService
     {
         // Restituiamo array di stringhe "pronte" per la console (semplice per i principianti)
         $out = [];
+        $out[] = "-------------------------------------------------------";
+        $out[] = sprintf(
+                '%s | %s | %s | %s | %s',
+                "ID",
+                "ID breve",
+                "titolo",
+                "autore",
+                "status"
+            );
+        $out[] = "-------------------------------------------------------";
         foreach ($this->books->findAll() as $book) {
             $status = $book->isAvailable() ? 'DISPONIBILE' : 'PRESTITO';
+            $stringaVecchia = $book->id();
+            $stringaNuova = str_replace("B", "#", $stringaVecchia);
             $out[] = sprintf(
-                '%s | %s | %s | %s',
+                '%s | %s | %s | %s | %s',
                 $book->id(),
+                $stringaNuova,
                 $book->title(),
                 $book->author(),
                 $status
