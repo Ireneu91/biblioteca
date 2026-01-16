@@ -73,7 +73,7 @@ switch ($command) {
     case 'members:list':
         $members = $membersRepo->findAll();
         //var_dump($members);
-        if($member){
+        if($members){
             foreach($members as $member){
                 echo $member->id()." | ". $member->fullName()."\n";
             }
