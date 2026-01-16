@@ -123,6 +123,25 @@ final class LibraryService
 
         return $out;
     }
+    
+    public function bookStatus(string $bookId): array | string
+    {
+        $book = $this->books->findById($bookId);
+        $loansRepo = $this->loans;
 
+        // se disponibile 
+        if($book->isAvailable()){
+            return $book->id()." ".$book->title()." ".$book->author()." disponibile ";
+        }
+        // se in prestito
+        else {
+            // loan_id e member_id
+            $loan = $loansRepo->findOpenLoanByBookId($bookId);
+            $loanId = $loan->loanId();
+            $memberId = $loan->memberId();
+            $stringa = $book->id()." ".$book->title()." ".$book->author()." in prestito ".$loanId." ".$memberId;
+            return $stringa;
+        }
+    }
  
 }

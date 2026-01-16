@@ -114,20 +114,8 @@ switch ($command) {
             echo "Il libro non esiste";
         }
         // se esiste
-        else {
-            // se disponibile 
-            if($book->isAvailable()){
-                echo $book->id()." ".$book->title()." ".$book->author()." disponibile ";
-            }
-            // se in prestito
-            else {
-                // loan_id e member_id
-                $loan = $loansRepo->findOpenLoanByBookId($bookId);
-                $loanId = $loan->loanId();
-                $memberId = $loan->memberId();
-                echo $book->id()." ".$book->title()." ".$book->author()." in prestito ".$loanId." ".$memberId;
-            }
-        } 
+        echo  $service->bookStatus($bookId);
+        
         exit(0);
 
     default:
