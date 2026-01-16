@@ -60,6 +60,14 @@ switch ($command) {
         exit(0);
 
     case 'books:list':
+        //se non ci sono libri
+        $libri = $booksRepo->findAll();
+        //var_dump($libri);
+        if(empty($libri)){
+            echo "Non abbiamo nemmeno un libro";
+            return;
+        }
+
         foreach ($service->listBooks() as $line) {
             echo $line . "\n";
         }
