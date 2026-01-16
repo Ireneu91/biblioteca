@@ -45,6 +45,7 @@ switch ($command) {
         echo "  help                      Mostra questa guida\n";
         echo "  books:list                Elenca libri\n";
         echo "  loans:list                Elenca prestiti aperti\n";
+        echo "  members:list              Elenca i membri\n";
         echo "  book:lend <BOOK> <MEM>    Presta un libro a un membro\n";
         echo "  book:return <BOOK>        Registra la restituzione di un libro\n";
         echo "\nEsempi:\n";
@@ -62,6 +63,18 @@ switch ($command) {
     case 'loans:list':
         foreach ($service->listOpenLoans() as $line) {
             echo $line . "\n";
+        }
+        exit(0);
+
+    case 'members:list':
+        $members = $membersRepo->findAll();
+        //var_dump($members);
+        if($member){
+            foreach($members as $member){
+                echo $member->id()." | ". $member->fullName()."\n";
+            }
+        }else{
+            echo "Nessun membro";
         }
         exit(0);
 
@@ -86,20 +99,6 @@ switch ($command) {
         }
 
         echo $service->returnBook($bookId, $todayYmd) . "\n";
-        exit(0);
-    
-    case 'members:list':
-        $members = $membersRepo->findAll();
-        //var_dump($members);
-        if($member){
-            foreach($members as $member){
-                echo $member->id()." | ". $member->fullName()."\n";
-            }
-        }else{
-            echo "Nessun membro";
-        }
-        
-        
         exit(0);
 
     default:
